@@ -36,17 +36,25 @@ app.get("/contacts", (req, res) => {
 });
 
 // save a new customer to the customer table on a POST http://localhost:3001/contacts request
-app.post("/contacts", (req, res) => {
+app.post("/contacts", (req, res, next) => {
   const lastCustomer =
     0 < contacts.length ? contacts[contacts.length - 1] : null;
   const newCustomerId = lastCustomer ? lastCustomer.id + 1 : 1;
 
+//validate if phone number is a duplicate
+const foundSavedPhoneNumber=contacts.find(item=>item.phone===req.body.phone)
+
+res.set("Access-Control-Allow-Origin", origin);
+
+if(foundSavedPhoneNumber){
+  next(err)
+} else {
   contacts.push({
     id: newCustomerId,
     name: req.body.name,
     phone: req.body.phone,
   });
-  res.set("Access-Control-Allow-Origin", origin);
+}
   res.json(contacts);
 });
 
