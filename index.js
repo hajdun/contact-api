@@ -1,12 +1,16 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require('cors');
+
+app.use(cors())
 
 // parse application/json
 app.use(bodyParser.json());
 
 const port = 3001;
 const frontendPort = 4200;
+const origin= `http://localhost:${frontendPort}`
 
 // the "database" (id "generated", name set somewhere on the UI)
 let contacts = [
@@ -22,7 +26,7 @@ let contacts = [
   },
 ];
 
-const origin= `http://localhost:${frontendPort}`
+
 
 
 // retrieve all contacts on a GET http://localhost:3001/contacts request
