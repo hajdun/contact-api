@@ -43,19 +43,20 @@ app.post("/contacts", (req, res, next) => {
 
 //validate if phone number is a duplicate
 const foundSavedPhoneNumber=contacts.find(item=>item.phone===req.body.phone)
-
 res.set("Access-Control-Allow-Origin", origin);
 
 if(foundSavedPhoneNumber){
-  next(err)
+  next("Error adding contact, phone number already exists" + foundSavedPhoneNumber)
 } else {
   contacts.push({
     id: newCustomerId,
     name: req.body.name,
     phone: req.body.phone,
   });
-}
+
   res.json(contacts);
+}
+
 });
 
 // updates an existing customer in the customer table on a PUT http://localhost:3001/contacts/[customerId] request
