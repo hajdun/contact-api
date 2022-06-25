@@ -46,7 +46,7 @@ const foundSavedPhoneNumber=contacts.find(item=>item.phone===req.body.phone)
 res.set("Access-Control-Allow-Origin", origin);
 
 if(foundSavedPhoneNumber){
-  next("Error adding contact, phone number already exists" + foundSavedPhoneNumber.name)
+  next("Error adding contact, phone number already exists for user named " + foundSavedPhoneNumber.name)
 } else {
   contacts.push({
     id: newCustomerId,
