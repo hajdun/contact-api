@@ -22,13 +22,12 @@ let contacts = [
   },
 ];
 
-const manageCors = (res) => {
-  res.set("Access-Control-Allow-Origin", `http://localhost:${frontendPort}`);
-};
+const origin= `http://localhost:${frontendPort}`
+
 
 // retrieve all contacts on a GET http://localhost:3001/contacts request
 app.get("/contacts", (req, res) => {
-  manageCors(res);
+  res.set("Access-Control-Allow-Origin", origin);
   res.json(contacts);
 });
 
@@ -43,7 +42,7 @@ app.post("/contacts", (req, res) => {
     name: req.body.name,
     phone: req.body.phone,
   });
-  manageCors(res);
+  res.set("Access-Control-Allow-Origin", origin);
   res.json(contacts);
 });
 
@@ -58,7 +57,7 @@ app.put("/contacts/:id", (req, res) => {
     ...contacts[modifiedCustomerIndex],
     ...req.body,
   };
-  manageCors(res);
+  res.set("Access-Control-Allow-Origin", origin);
   res.json(contacts);
 });
 
@@ -69,7 +68,7 @@ app.delete("/contacts/:id", (req, res) => {
   contacts = contacts.filter((element) => {
     return element.id.toString() != idFromParameter;
   });
-  manageCors(res);
+  res.set("Access-Control-Allow-Origin", origin);
   res.json(contacts);
 });
 
