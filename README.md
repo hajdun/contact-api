@@ -10,11 +10,13 @@ This is a small mock api to manage contacts (name, phone number). It has no data
 
 ## Data structure
 
-`{
+```
+{
     id: number // auto-generated
     name: string
     phone: string
-}`
+}
+```
 
 ## Endpoints
 
